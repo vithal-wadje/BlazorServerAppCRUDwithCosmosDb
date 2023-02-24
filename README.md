@@ -14,7 +14,7 @@ This repository provides a starting point for building ASP.NET Core Blazor Serve
 
 # Detail Description
 
-The following link of my personal blog provides a step-by-step explanation of implementation.
+The following is a link to my personal blog, which provides a step-by-step explanation of the above implementation.
 
 
 
