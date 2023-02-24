@@ -2,7 +2,7 @@
 @using EmployeeMgmtBlazorServerApp.Data
 @using EmployeeMgmtBlazorServerApp.Model
 @inject EmployeeService empService
-
+@inject NavigationManager NavManager
 <EditForm Model="@employee">
     <div class="form-group row p-2">
        
@@ -53,7 +53,7 @@
     {
 
         await empService.UpdateEmployee(employee);
-      
+        NavManager.NavigateTo("/");
    
        
         
