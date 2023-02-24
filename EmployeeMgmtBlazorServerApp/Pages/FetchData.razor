@@ -1,0 +1,61 @@
+﻿@page "/fetchdata"
+@using EmployeeMgmtBlazorServerApp.Data
+@using EmployeeMgmtBlazorServerApp.Model
+@inject EmployeeService empService
+
+@if (employees == null)
+{
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name </th>
+                    <th>Country </th>
+                    <th>City </th>
+                    <th>Department </th>
+                    <th>Designation </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in employees)
+                {
+                    <tr>
+                        <td>@emp.Name</td>
+                        <td>@emp.Country</td>
+                        <td>@emp.City</td>
+                        <td>@emp.Department</td>
+                        <td>@emp.Designation</td>
+                        <td>
+                            <a href=@($"EmployeeEdit/{emp.id}/{emp.Department}") class="btn btn-primary"><span class="oi oi-pencil" /> </a>
+                            <button class="btn btn-danger" @onclick="async () => await DeleteEmployee(emp.id, emp.Department)"><span class="oi oi-trash" /></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public List<EmployeeModel>? employees { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await empService.GetEmployeeDetails();
+    }
+
+    private async Task DeleteEmployee(Guid? id, string? department)
+    {
+        await empService.DeleteEmployee(Convert.ToString(id), department);
+        employees = await empService.GetEmployeeDetails();
+      
+    }
+}

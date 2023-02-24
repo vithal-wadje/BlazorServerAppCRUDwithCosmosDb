@@ -1,0 +1,61 @@
+﻿@page "/EmployeeEdit/{id}/{partitionKey}"
+@using EmployeeMgmtBlazorServerApp.Data
+@using EmployeeMgmtBlazorServerApp.Model
+@inject EmployeeService empService
+
+<EditForm Model="@employee">
+    <div class="form-group row p-2">
+       
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Name" @bind-value="employee.Name" />
+        </div>
+        
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Country" @bind-value="employee.Country" />
+        </div>
+    </div>
+    <div class="form-group row p-2">
+        
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="City" @bind-value="employee.City" />
+        </div>
+        
+        <div class="col-md-6">
+            <input type="text" class="form-control" readonly placeholder="Department" @bind-value="employee.Department" />
+        </div>
+    </div>
+    <div class="form-group row p-2">
+      
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Designation" @bind-value="employee.Designation" />
+        </div>
+    </div>
+    <div class="form-group row p-2">
+        <div class="text-center">
+            <button  class="btn btn-primary" @onclick="@(async () => await UpdateRecord())">Update</button>
+          
+        </div>
+    </div>
+</EditForm>
+@code {
+    private EmployeeModel employee=new EmployeeModel();
+
+    [Parameter]
+    public string? id { get; set; }
+    [Parameter]
+    public string? partitionKey { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await empService.GetEmployeeDetailsById(id, partitionKey);
+    }
+    private async Task UpdateRecord()
+    {
+
+        await empService.UpdateEmployee(employee);
+      
+   
+       
+        
+    }
+}
