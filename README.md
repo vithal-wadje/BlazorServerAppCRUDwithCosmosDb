@@ -7,7 +7,7 @@ This repository provides a starting point for building ASP.NET Core Blazor Serve
 # Technology Stack
 - ASP.NET Core Blazor Server
 - C#
--Azure Cosmos DB
+- Azure Cosmos DB
 # Tools
 - Visual Studio 2022
 - Azure Cosmos DB Emulator
