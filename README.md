@@ -18,4 +18,4 @@ The following is a link to my personal blog, which provides a step-by-step expla
 
 
 
-- https://www.compilemode.com
+- https://www.compilemode.com/2023/02/asp-net-core-blazor-server-crud-operations-with-azure-cosmos-db-and-csharp.html
